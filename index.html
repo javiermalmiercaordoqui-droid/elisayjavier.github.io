@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Elisa & Javier</title>
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --brand:#c7a17a;
+      --ink:#333;
+      --muted:#777;
+      --paper:#ffffff;
+      --bg:#faf8f5;
+      --overlay:rgba(0,0,0,.34);
+      --shadow:0 10px 24px rgba(0,0,0,.10);
+      --radius:14px;
+      --gap:22px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Montserrat, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    }
+
+    /* ===== NAV FIJO (responsive) ===== */
+    nav{
+      position:fixed; inset:0 0 auto 0; height:56px;
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      background:rgba(250,248,245,.92); backdrop-filter:blur(6px);
+      border-bottom:1px solid rgba(0,0,0,.06);
+      z-index:1000; padding:0 12px;
+      overflow-x:auto; white-space:nowrap;
+    }
+    nav a{
+      color:var(--ink); text-decoration:none; font-weight:600;
+      font-size:14px; padding:8px 10px; border-radius:10px;
+    }
+    nav a:hover{ background:#efe9df; }
+    @media (min-width: 768px){
+      nav{ height:64px; gap:14px; }
+      nav a{ font-size:15px; padding:8px 12px; }
+    }
+
+    /* ===== HEADER con imagen de fondo ===== */
+    header.hero{
+      min-height:86vh;
+      display:flex; align-items:center; justify-content:center; text-align:center;
+      padding:calc(56px + 24px) 16px 40px; /* salva nav fijo en móvil */
+      background-image:
+        linear-gradient(to bottom, var(--overlay), rgba(0,0,0,.28)),
+        url("img_foto1.jpg");
+      background-size:cover;
+      background-position:center;
+      color:#fff;
+    }
+    @media (min-width:768px){
+      header.hero{ padding:calc(64px + 24px) 24px 56px; }
+    }
+    .hero-inner{ width:min(1100px, 94vw); }
+    h1{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(36px, 7vw, 64px);
+      margin:0;
+      text-shadow:0 2px 12px rgba(0,0,0,.35);
+      line-height:1.1;
+    }
+    .date{
+      font-size:clamp(16px, 2.6vw, 22px);
+      margin-top:8px; opacity:.95;
+    }
+
+    /* ===== CRONÓMETRO (chips, compacto y accesible) ===== */
+    .countdown{
+      margin:22px auto 0;
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+      width:min(720px, 96vw);
+    }
+    .cd-item{
+      min-width:96px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.35);
+      color:#fff; border-radius:12px; padding:10px 12px;
+      box-shadow:0 6px 18px rgba(0,0,0,.18);
+      backdrop-filter: blur(2px);
+      text-align:center;
+    }
+    .cd-num{
+      font-family:'Playfair Display',serif; font-weight:600;
+      font-size:clamp(22px, 5vw, 40px); line-height:1;
+    }
+    .cd-lbl{
+      margin-top:4px; font-size:10px; letter-spacing:2px;
+      text-transform:uppercase; opacity:.88;
+    }
+
+    /* ===== SECCIONES genéricas ===== */
+    .section{
+      padding:64px 16px; max-width:1100px; margin:auto; text-align:center;
+      scroll-margin-top:76px; /* ancla bajo el nav */
+    }
+    @media (min-width:768px){ .section{ padding:80px 24px; scroll-margin-top:92px; } }
+    .section h3{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(26px, 4vw, 38px); margin:0 0 16px 0;
+    }
+    .card{
+      background:var(--paper); padding:20px; border-radius:var(--radius);
+      box-shadow:var(--shadow); margin:18px 0; text-align:left;
+    }
+    @media (min-width:768px){ .card{ padding:24px; } }
+
+    /* ===== Ceremonia + Banquete (izq) + Foto (dcha) ===== */
+    .event-wrap{
+      display:grid; gap:var(--gap);
+      grid-template-columns:1fr; align-items:stretch;
+    }
+    .event-left{ display:grid; gap:16px; }
+    .event-photo{
+      width:100%; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+      max-height:520px;
+    }
+    .event-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+    @media (min-width: 900px){
+      .event-wrap{ grid-template-columns:1.15fr .85fr; }
+      .event-left{ gap:18px; }
+    }
+
+    .block-title{ margin:0 0 8px 0; font-size:20px; font-weight:700; }
+
+    .button{
+      display:inline-block; margin-top:8px; padding:10px 18px;
+      border-radius:24px; background:var(--brand); color:#fff; text-decoration:none;
+      font-weight:700; font-size:14px;
+      box-shadow:0 6px 16px rgba(199,161,122,.35);
+    }
+
+    /* ===== Foto de transición ===== */
+    .divider-photo{
+      width:100%; height: clamp(220px, 36vw, 360px);
+      border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+    }
+    .divider-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* ===== IBAN ===== */
+    .bank{ font-size:16px; margin-top:10px; letter-spacing:1px; text-align:center; }
+    .iban-wrap{
+      display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap; margin-top:10px;
+    }
+    code{ background:#f2eee8; color:#222; padding:8px 12px; border-radius:8px; font-size:15px; }
+
+    footer{ padding:40px 16px; text-align:center; font-size:14px; color:#777; }
+
+    /* ===== REVEAL / transiciones en scroll ===== */
+    .reveal{ opacity:0; transform: translateY(14px); transition:600ms ease; }
+    .reveal.is-visible{ opacity:1; transform:none; }
+
+    /* ===== Accesibilidad: prefiere reducir movimiento ===== */
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior:auto; }
+      .reveal{ opacity:1; transform:none; transition:none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav aria-label="Navegación principal">
+    <a href="#inicio">Inicio</a>
+    <a href="#evento">Ceremonia &amp; Banquete</a>
+    <a href="#hoteles">Hoteles</a>
+    <a href="#asistencia">Asistencia</a>
+    <a href="#regalo">Regalo de boda</a>
+  </nav>
+
+  <!-- HEADER -->
+  <header id="inicio" class="hero">
+    <div class="hero-inner">
+      <h1>Elisa &amp; Javier</h1>
+      <div class="date">14 de noviembre de 2026 · Zaragoza</div>
+
+      <!-- Cuenta atrás -->
+      <div class="countdown" aria-live="polite">
+        <div class="cd-item"><div class="cd-num" id="dd">00</div><div class="cd-lbl">días</div></div>
+        <div class="cd-item"><div class="cd-num" id="hh">00</div><div class="cd-lbl">horas</div></div>
+        <div class="cd-item"><div class="cd-num" id="mm">00</div><div class="cd-lbl">minutos</div></div>
+        <div class="cd-item"><div class="cd-num" id="ss">00</div><div class="cd-lbl">segundos</div></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CEREMONIA + BANQUETE (izq) + FOTO 2 (dcha) -->
+  <section class="section reveal" id="evento">
+    <div class="event-wrap">
+      <div class="event-left">
+        <div class="card">
+          <h3 class="block-title">Ceremonia</h3>
+          <p><strong>San Felipe y Santiago el Menor</strong></p>
+          <p>
+            Pl. de S. Felipe, Casco Antiguo, Zaragoza ·
+            <a class="button" href="https://www.google.com/maps/place/Iglesia+de+San+Felipe+y+Santiago+%22el+Menor%22/@41.6546074,-0.885016,17z" target="_blank" rel="noopener">Mapa</a>
+          </p>
+          <p><strong>12:00 h</strong></p>
+        </div>
+
+        <div class="card">
+          <h3 class="block-title">Banquete</h3>
+          <p><strong>Finca Sansui</strong></p>
+          <p>
+            50830 Villanueva de Gállego, Zaragoza ·
+            <a class="button" href="https://www.google.com/maps/place/Finca+Sansui/@41.7375735,-0.8499387,17z" target="_blank" rel="noopener">Mapa</a>
+          </p>
+          <p><strong>14:00 h</strong></p>
+        </div>
+      </div>
+
+      <div class="event-photo">
+        <img src="img_foto2.jpg" alt="Foto de pareja para ilustrar ceremonia y banquete" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- HOTELES -->
+  <section class="section reveal" id="hoteles">
+    <h3>Hoteles recomendados</h3>
+
+    <div class="card">
+      <h4 style="margin:0 0 6px 0;">Hotel Innside by Meliá Zaragoza</h4>
+      <p style="margin:0 0 8px 0;">Se puede reservar a través de la siguiente página web:</p>
+      <p style="margin:0 0 10px 0;">
+        <a class="button" href="https://events.melia.com/es/events/innside-zaragoza/ENLACE-ELISA-Y-JAVIER" target="_blank" rel="noopener">Reservar habitación</a>
+      </p>
+      <div style="margin-top:8px; text-align:left; max-width:720px;">
+        <p style="margin:0 0 6px 0;"><strong>Con los correspondientes descuentos</strong></p>
+        <ul style="line-height:1.7; padding-left:18px; margin:0;">
+          <li>20% hasta 2 meses antes de la llegada.</li>
+          <li>15% entre 2 meses y 15 días antes.</li>
+          <li>10% entre 14 y el día de llegada.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4 style="margin:0 0 6px 0;">Aparthotel Los Girasoles</h4>
+      <p style="max-width:800px; margin:0;">
+        Reservas vía telefónica (976 46 92 00) o vía mail (informacion@losgirasoles.info) indicando “Enlace Elisa &amp; Javier del 14 de Noviembre”.
+      </p>
+    </div>
+
+    <div class="card">
+      <h4 style="margin:0;">Hotel Alfonso</h4>
+    </div>
+  </section>
+
+  <!-- ¿NOS ACOMPAÑAS? -->
+  <section class="section reveal" id="asistencia">
+    <h3>¿Nos acompañas?</h3>
+    <p>Es un día muy especial para nosotros y queremos que lo disfrutes con nosotros.</p>
+    <a class="button" href="https://forms.gle/y8c1GELsSz4hQiGC6" target="_blank" rel="noopener">Confirmar asistencia</a>
+  </section>
+
+  <!-- FOTO 3 de transición -->
+  <section class="section reveal" aria-hidden="true" style="padding-top:0;">
+    <div class="divider-photo">
+      <img src="img_foto3.jpg" alt="" loading="lazy">
+    </div>
+  </section>
+
+  <!-- REGALO DE BODA -->
+  <section class="section reveal" id="regalo">
+    <h3>Regalo de boda</h3>
+    <p>Vuestra presencia es, sin duda, nuestro mayor regalo.</p>
+    <p>Si además deseáis acompañarnos en el comienzo de esta nueva aventura, os estaremos muy agradecidos.</p>
+
+    <div class="bank">
+      <div class="iban-wrap">
+        <code id="iban">ES36 0049 7405 0020 1004 7891</code>
+        <button class="button" id="copyIbanBtn" onclick="copyIBAN()">Copiar IBAN</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>¡Gracias por acompañarnos en este día tan especial!</p>
+  </footer>
+
+  <script>
+    // === CUENTA ATRÁS (responsive) ===
+    const target = new Date("Nov 14, 2026 12:00:00").getTime();
+    const el = {dd:document.getElementById('dd'), hh:document.getElementById('hh'),
+                mm:document.getElementById('mm'), ss:document.getElementById('ss')};
+
+    function tick(){
+      const now = Date.now();
+      let d = target - now;
+      if (d <= 0){ d = 0; clearInterval(t); }
+      const days = Math.floor(d / 86400000);
+      const hours = Math.floor((d % 86400000) / 3600000);
+      const mins = Math.floor((d % 3600000) / 60000);
+      const secs = Math.floor((d % 60000) / 1000);
+      el.dd.textContent = String(days);
+      el.hh.textContent = String(hours).padStart(2,'0');
+      el.mm.textContent = String(mins).padStart(2,'0');
+      el.ss.textContent = String(secs).padStart(2,'0');
+    }
+    const t = setInterval(tick, 1000); tick();
+
+    // === COPIAR IBAN ===
+    function copyIBAN(){
+      const iban = document.getElementById("iban").innerText.trim();
+      navigator.clipboard.writeText(iban).then(()=>{
+        const btn = document.getElementById("copyIbanBtn");
+        const prev = btn.textContent;
+        btn.textContent = "¡Copiado!";
+        setTimeout(()=> btn.textContent = prev, 1500);
+      }).catch(()=> alert("No se pudo copiar. Copia manual: "+iban));
+    }
+
+    // === REVEAL EN SCROLL (transiciones fluidas) ===
+    const io = new IntersectionObserver((entries)=>{
+      for(const e of entries){
+        if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      }
+    }, {threshold: .12});
+    document.querySelectorAll('.reveal').forEach(n => io.observe(n));
+  </script>
+</body>
+</html>
