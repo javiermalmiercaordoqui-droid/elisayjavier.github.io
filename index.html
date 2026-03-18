@@ -5,168 +5,271 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Elisa & Javier</title>
 
-  <!-- Fuentes -->
-  <link href="https://www.google.com/maps/place/Iglesia+de+San+Felipe+y+Santiago+%22el+Menor%22/@41.6546074,-0.8850106,17z/data=!3m1!4b1!4m6!3m5!1s0xd59153d381452e7:0xcc3461453f380e24!8m2!3d41.6546074!4d-0.8824357!16s%2Fg%2F121c9ydx?entry=ttu&g_ep=EgoyMDI2MDMxMS4wIKXMDSoASAFQAw%3D%3D" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --brand:#c7a17a;
-      --ink:#333;
-      --muted:#777;
-      --paper:#ffffff;
-      --bg:#faf8f5;
-      --overlay:rgba(0,0,0,.34);
-      --shadow:0 10px 24px rgba(0,0,0,.10);
-      --radius:14px;
-      --gap:22px;
+      --brand:#b8916a;
+      --brand-light:#e8d5c0;
+      --ink:#2a2420;
+      --muted:#8a7d74;
+      --paper:#fffdf9;
+      --bg:#f7f3ee;
+      --overlay:rgba(20,14,10,.42);
+      --shadow:0 8px 32px rgba(80,50,20,.10);
+      --radius:4px;
+      --gap:24px;
     }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+    *{box-sizing:border-box; margin:0; padding:0;}
+    html{scroll-behavior:smooth;}
     body{
-      margin:0;
-      font-family:Montserrat, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family:'Jost', system-ui, sans-serif;
+      font-weight:300;
       color:var(--ink);
       background:var(--bg);
-      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
     }
 
-    /* ===== NAV FIJO (responsive) ===== */
+    /* ===== NAV ===== */
     nav{
-      position:fixed; inset:0 0 auto 0; height:56px;
-      display:flex; align-items:center; justify-content:center; gap:10px;
-      background:rgba(250,248,245,.92); backdrop-filter:blur(6px);
-      border-bottom:1px solid rgba(0,0,0,.06);
-      z-index:1000; padding:0 12px;
+      position:fixed; inset:0 0 auto 0; height:58px;
+      display:flex; align-items:center; justify-content:center; gap:6px;
+      background:rgba(247,243,238,.95); backdrop-filter:blur(8px);
+      border-bottom:1px solid rgba(184,145,106,.18);
+      z-index:1000; padding:0 16px;
       overflow-x:auto; white-space:nowrap;
     }
     nav a{
-      color:var(--ink); text-decoration:none; font-weight:600;
-      font-size:14px; padding:8px 10px; border-radius:10px;
+      color:var(--muted); text-decoration:none; font-weight:400; letter-spacing:.06em;
+      font-size:12.5px; text-transform:uppercase; padding:8px 12px; border-radius:2px;
+      transition:color .2s;
     }
-    nav a:hover{ background:#efe9df; }
-    @media (min-width: 768px){
-      nav{ height:64px; gap:14px; }
-      nav a{ font-size:15px; padding:8px 12px; }
-    }
+    nav a:hover{ color:var(--brand); }
+    @media (min-width:768px){ nav{ height:66px; gap:10px; } nav a{ font-size:13px; } }
 
-    /* ===== HEADER con imagen de fondo ===== */
+    /* ===== HERO ===== */
     header.hero{
-      min-height:86vh;
+      min-height:92vh;
       display:flex; align-items:center; justify-content:center; text-align:center;
-      padding:calc(56px + 24px) 16px 40px; /* salva nav fijo en móvil */
+      padding:calc(58px + 32px) 20px 48px;
       background-image:
-        linear-gradient(to bottom, var(--overlay), rgba(0,0,0,.28)),
+        linear-gradient(to bottom, var(--overlay), rgba(20,14,10,.22)),
         url("img_foto1.jpg");
       background-size:cover;
       background-position:center;
       color:#fff;
     }
-    @media (min-width:768px){
-      header.hero{ padding:calc(64px + 24px) 24px 56px; }
-    }
-    .hero-inner{ width:min(1100px, 94vw); }
+    @media (min-width:768px){ header.hero{ padding:calc(66px + 32px) 32px 64px; } }
+
+    .hero-inner{ width:min(900px, 94vw); }
+
     h1{
-      font-family:'Playfair Display',serif;
-      font-size:clamp(36px, 7vw, 64px);
-      margin:0;
-      text-shadow:0 2px 12px rgba(0,0,0,.35);
-      line-height:1.1;
+      font-family:'Cormorant Garamond', serif;
+      font-size:clamp(52px, 10vw, 96px);
+      font-weight:300;
+      line-height:1.04;
+      text-shadow:0 2px 20px rgba(0,0,0,.3);
+      letter-spacing:.01em;
     }
-    .date{
-      font-size:clamp(16px, 2.6vw, 22px);
-      margin-top:8px; opacity:.95;
+    h1 em{ font-style:italic; }
+
+    .hero-divider{
+      width:48px; height:1px;
+      background:rgba(255,255,255,.5);
+      margin:22px auto;
     }
 
-    /* ===== CRONÓMETRO (chips, compacto y accesible) ===== */
+    .date{
+      font-size:clamp(13px, 2.2vw, 17px);
+      letter-spacing:.18em; text-transform:uppercase;
+      opacity:.9; font-weight:400;
+    }
+
+    /* ===== COUNTDOWN ===== */
     .countdown{
-      margin:22px auto 0;
-      display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
-      width:min(720px, 96vw);
+      margin:32px auto 0;
+      display:flex; flex-wrap:wrap; gap:12px; justify-content:center;
     }
     .cd-item{
-      min-width:96px;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.35);
-      color:#fff; border-radius:12px; padding:10px 12px;
-      box-shadow:0 6px 18px rgba(0,0,0,.18);
-      backdrop-filter: blur(2px);
+      min-width:88px;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.22);
+      color:#fff; border-radius:3px; padding:14px 14px 10px;
+      backdrop-filter:blur(4px);
       text-align:center;
     }
     .cd-num{
-      font-family:'Playfair Display',serif; font-weight:600;
-      font-size:clamp(22px, 5vw, 40px); line-height:1;
+      font-family:'Cormorant Garamond', serif; font-weight:400;
+      font-size:clamp(28px, 6vw, 48px); line-height:1;
     }
     .cd-lbl{
-      margin-top:4px; font-size:10px; letter-spacing:2px;
-      text-transform:uppercase; opacity:.88;
+      margin-top:5px; font-size:9.5px; letter-spacing:.22em;
+      text-transform:uppercase; opacity:.7;
     }
 
-    /* ===== SECCIONES genéricas ===== */
+    /* ===== SECTIONS ===== */
     .section{
-      padding:64px 16px; max-width:1100px; margin:auto; text-align:center;
-      scroll-margin-top:76px; /* ancla bajo el nav */
+      padding:72px 20px; max-width:1060px; margin:auto;
+      scroll-margin-top:80px;
     }
-    @media (min-width:768px){ .section{ padding:80px 24px; scroll-margin-top:92px; } }
-    .section h3{
-      font-family:'Playfair Display',serif;
-      font-size:clamp(26px, 4vw, 38px); margin:0 0 16px 0;
-    }
-    .card{
-      background:var(--paper); padding:20px; border-radius:var(--radius);
-      box-shadow:var(--shadow); margin:18px 0; text-align:left;
-    }
-    @media (min-width:768px){ .card{ padding:24px; } }
+    @media (min-width:768px){ .section{ padding:96px 32px; scroll-margin-top:96px; } }
 
-    /* ===== Ceremonia + Banquete (izq) + Foto (dcha) ===== */
+    .section-heading{
+      text-align:center; margin-bottom:48px;
+    }
+    .section-heading h3{
+      font-family:'Cormorant Garamond', serif;
+      font-size:clamp(28px, 4.5vw, 44px);
+      font-weight:300; letter-spacing:.02em;
+    }
+    .section-heading .rule{
+      width:40px; height:1px; background:var(--brand);
+      margin:14px auto 0;
+    }
+
+    /* ===== EVENT GRID ===== */
     .event-wrap{
       display:grid; gap:var(--gap);
       grid-template-columns:1fr; align-items:stretch;
     }
     .event-left{ display:grid; gap:16px; }
     .event-photo{
-      width:100%; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
-      max-height:520px;
+      width:100%; border-radius:var(--radius); overflow:hidden;
+      box-shadow:var(--shadow);
     }
-    .event-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
-    @media (min-width: 900px){
-      .event-wrap{ grid-template-columns:1.15fr .85fr; }
-      .event-left{ gap:18px; }
+    .event-photo img{ width:100%; height:100%; object-fit:cover; display:block; min-height:320px; }
+    @media (min-width:900px){
+      .event-wrap{ grid-template-columns:1.1fr .9fr; }
     }
 
-    .block-title{ margin:0 0 8px 0; font-size:20px; font-weight:700; }
+    /* ===== CARD ===== */
+    .card{
+      background:var(--paper); padding:28px 28px 24px;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      border:1px solid rgba(184,145,106,.1);
+      text-align:left;
+    }
+    @media (min-width:768px){ .card{ padding:32px; } }
 
+    .card-eyebrow{
+      font-size:10.5px; letter-spacing:.22em; text-transform:uppercase;
+      color:var(--brand); font-weight:500; margin-bottom:10px;
+    }
+    .card h4{
+      font-family:'Cormorant Garamond', serif;
+      font-size:clamp(20px,2.8vw,26px); font-weight:400;
+      margin-bottom:6px; line-height:1.2;
+    }
+    .card .venue-address{
+      font-size:13.5px; color:var(--muted); line-height:1.6; margin-bottom:14px;
+    }
+    .card .event-time{
+      font-family:'Cormorant Garamond', serif;
+      font-size:clamp(22px,3vw,30px); font-weight:300;
+      color:var(--ink); letter-spacing:.02em;
+      margin-bottom:16px;
+    }
+
+    .map-link{
+      display:inline-flex; align-items:center; gap:6px;
+      font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+      font-weight:500; color:var(--brand); text-decoration:none;
+      border-bottom:1px solid var(--brand-light);
+      padding-bottom:2px;
+      transition:border-color .2s, color .2s;
+    }
+    .map-link:hover{ border-color:var(--brand); }
+    .map-link svg{ flex-shrink:0; }
+
+    /* ===== BUTTON ===== */
     .button{
-      display:inline-block; margin-top:8px; padding:10px 18px;
-      border-radius:24px; background:var(--brand); color:#fff; text-decoration:none;
-      font-weight:700; font-size:14px;
-      box-shadow:0 6px 16px rgba(199,161,122,.35);
+      display:inline-block; padding:12px 26px;
+      border:1px solid var(--brand); color:var(--brand);
+      background:transparent; text-decoration:none;
+      font-family:'Jost', sans-serif; font-weight:400;
+      font-size:12.5px; letter-spacing:.14em; text-transform:uppercase;
+      border-radius:2px; cursor:pointer;
+      transition:background .22s, color .22s;
+    }
+    .button:hover{ background:var(--brand); color:#fff; }
+    .button.filled{
+      background:var(--brand); color:#fff;
+    }
+    .button.filled:hover{ background:#a07558; border-color:#a07558; }
+
+    /* ===== HOTELES ===== */
+    .hotel-grid{ display:grid; gap:16px; }
+    @media (min-width:640px){ .hotel-grid{ grid-template-columns:repeat(3,1fr); } }
+    .hotel-card{
+      background:var(--paper); padding:24px;
+      border-radius:var(--radius); box-shadow:var(--shadow);
+      border:1px solid rgba(184,145,106,.1);
+    }
+    .hotel-card h4{
+      font-family:'Cormorant Garamond', serif; font-size:18px;
+      font-weight:400; margin-bottom:10px; line-height:1.3;
+    }
+    .hotel-card p{
+      font-size:13.5px; color:var(--muted); line-height:1.65; margin-bottom:10px;
+    }
+    .hotel-card ul{
+      padding-left:16px; font-size:13px; color:var(--muted); line-height:1.8;
     }
 
-    /* ===== Foto de transición ===== */
+    /* ===== DIVIDER PHOTO ===== */
     .divider-photo{
-      width:100%; height: clamp(220px, 36vw, 360px);
+      width:100%; height:clamp(200px, 30vw, 340px);
       border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
     }
     .divider-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-    /* ===== IBAN ===== */
-    .bank{ font-size:16px; margin-top:10px; letter-spacing:1px; text-align:center; }
-    .iban-wrap{
-      display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap; margin-top:10px;
+    /* ===== ASISTENCIA ===== */
+    .asistencia-inner{
+      text-align:center; max-width:480px; margin:auto;
     }
-    code{ background:#f2eee8; color:#222; padding:8px 12px; border-radius:8px; font-size:15px; }
+    .asistencia-inner p{
+      font-size:15.5px; line-height:1.7; color:var(--muted); margin-bottom:28px;
+    }
 
-    footer{ padding:40px 16px; text-align:center; font-size:14px; color:#777; }
+    /* ===== REGALO ===== */
+    .regalo-inner{
+      text-align:center; max-width:560px; margin:auto;
+    }
+    .regalo-inner p{
+      font-size:15.5px; line-height:1.7; color:var(--muted); margin-bottom:10px;
+    }
+    .iban-block{
+      margin-top:28px; padding:24px 28px;
+      background:var(--paper); border:1px solid rgba(184,145,106,.15);
+      border-radius:var(--radius); box-shadow:var(--shadow);
+    }
+    .iban-number{
+      font-family:'Cormorant Garamond', serif;
+      font-size:clamp(18px,3.5vw,26px); letter-spacing:.05em;
+      color:var(--ink); display:block; margin-bottom:16px;
+    }
 
-    /* ===== REVEAL / transiciones en scroll ===== */
-    .reveal{ opacity:0; transform: translateY(14px); transition:600ms ease; }
+    /* ===== FOOTER ===== */
+    footer{
+      padding:48px 20px 40px; text-align:center;
+      border-top:1px solid rgba(184,145,106,.15);
+    }
+    footer p{
+      font-family:'Cormorant Garamond', serif;
+      font-size:clamp(16px,2.5vw,20px); font-weight:300;
+      color:var(--muted); font-style:italic;
+    }
+
+    /* ===== REVEAL ===== */
+    .reveal{ opacity:0; transform:translateY(18px); transition:700ms ease; }
     .reveal.is-visible{ opacity:1; transform:none; }
-
-    /* ===== Accesibilidad: prefiere reducir movimiento ===== */
-    @media (prefers-reduced-motion: reduce){
-      html{ scroll-behavior:auto; }
-      .reveal{ opacity:1; transform:none; transition:none; }
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .reveal{opacity:1;transform:none;transition:none}
     }
   </style>
 </head>
@@ -178,16 +281,16 @@
     <a href="#evento">Ceremonia &amp; Banquete</a>
     <a href="#hoteles">Hoteles</a>
     <a href="#asistencia">Asistencia</a>
-    <a href="#regalo">Regalo de boda</a>
+    <a href="#regalo">Regalo</a>
   </nav>
 
-  <!-- HEADER -->
+  <!-- HERO -->
   <header id="inicio" class="hero">
     <div class="hero-inner">
-      <h1>Elisa &amp; Javier</h1>
-      <div class="date">14 de noviembre de 2026 · Zaragoza</div>
+      <h1><em>Elisa</em> &amp; Javier</h1>
+      <div class="hero-divider"></div>
+      <div class="date">14 · noviembre · 2026 &nbsp;·&nbsp; Zaragoza</div>
 
-      <!-- Cuenta atrás -->
       <div class="countdown" aria-live="polite">
         <div class="cd-item"><div class="cd-num" id="dd">00</div><div class="cd-lbl">días</div></div>
         <div class="cd-item"><div class="cd-num" id="hh">00</div><div class="cd-lbl">horas</div></div>
@@ -197,123 +300,139 @@
     </div>
   </header>
 
-  <!-- CEREMONIA + BANQUETE (izq) + FOTO 2 (dcha) -->
+  <!-- CEREMONIA + BANQUETE -->
   <section class="section reveal" id="evento">
+    <div class="section-heading">
+      <h3>El gran día</h3>
+      <div class="rule"></div>
+    </div>
+
     <div class="event-wrap">
       <div class="event-left">
+
         <div class="card">
-          <h3 class="block-title">Ceremonia</h3>
-          <p><strong>San Felipe y Santiago el Menor</strong></p>
-          <p>
-            Pl. de S. Felipe, Casco Antiguo, Zaragoza ·
-            <a class="button" href="https://www.google.com/maps/place/Iglesia+de+San+Felipe+y+Santiago+%22el+Menor%22/@41.6546074,-0.8850106,17z/data=!3m1!4b1!4m6!3m5!1s0xd59153d381452e7:0xcc3461453f380e24!8m2!3d41.6546074!4d-0.8824357!16s%2Fg%2F121c9ydx?entry=ttu&g_ep=EgoyMDI2MDMxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Mapa</a>
-          </p>
-          <p><strong>12:00 h</strong></p>
+          <p class="card-eyebrow">Ceremonia</p>
+          <h4>San Felipe y Santiago el Menor</h4>
+          <div class="event-time">12:00 h</div>
+          <p class="venue-address">Pl. de San Felipe, Casco Antiguo · Zaragoza</p>
+          <a class="map-link" href="https://www.google.com/maps/place/Iglesia+de+San+Felipe+y+Santiago+%22el+Menor%22/@41.6546074,-0.8850106,17z/data=!3m1!4b1!4m6!3m5!1s0xd59153d381452e7:0xcc3461453f380e24!8m2!3d41.6546074!4d-0.8824357!16s%2Fg%2F121c9ydx?entry=ttu&g_ep=EgoyMDI2MDMxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Ver en el mapa
+          </a>
         </div>
 
         <div class="card">
-          <h3 class="block-title">Banquete</h3>
-          <p><strong>Finca Sansui</strong></p>
-          <p>
-            50830 Villanueva de Gállego, Zaragoza ·
-            <a class="button" href="https://www.google.com/maps/place/Finca+Sansui/@41.7375735,-0.8499387,17z/data=!3m1!4b1!4m6!3m5!1s0xd59123fd8535477:0xa55e36e1955aa499!8m2!3d41.7375735!4d-0.8473638!16s%2Fg%2F11b5qw82n_?entry=ttu&g_ep=EgoyMDI2MDMxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Mapa</a>
-          </p>
-          <p><strong>14:00 h</strong></p>
+          <p class="card-eyebrow">Banquete</p>
+          <h4>Finca Sansui</h4>
+          <div class="event-time">14:00 h</div>
+          <p class="venue-address">50830 Villanueva de Gállego · Zaragoza</p>
+          <a class="map-link" href="https://www.google.com/maps/place/Finca+Sansui/@41.7375735,-0.8499387,17z/data=!3m1!4b1!4m6!3m5!1s0xd59123fd8535477:0xa55e36e1955aa499!8m2!3d41.7375735!4d-0.8473638!16s%2Fg%2F11b5qw82n_?entry=ttu&g_ep=EgoyMDI2MDMxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Ver en el mapa
+          </a>
         </div>
+
       </div>
 
       <div class="event-photo">
-        <img src="img_foto2.jpg" alt="Foto de pareja para ilustrar ceremonia y banquete" loading="lazy">
+        <img src="img_foto2.jpg" alt="Elisa y Javier" loading="lazy">
       </div>
     </div>
   </section>
 
   <!-- HOTELES -->
   <section class="section reveal" id="hoteles">
-    <h3>Hoteles recomendados</h3>
+    <div class="section-heading">
+      <h3>Dónde alojarse</h3>
+      <div class="rule"></div>
+    </div>
 
-    <div class="card">
-      <h4 style="margin:0 0 6px 0;">Hotel Innside by Meliá Zaragoza</h4>
-      <p style="margin:0 0 8px 0;">Se puede reservar a través de la siguiente página web:</p>
-      <p style="margin:0 0 10px 0;">
-        <a class="button" href="https://events.melia.com/es/events/innside-zaragoza/ENLACE-ELISA-Y-JAVIER" target="_blank" rel="noopener">Reservar habitación</a>
-      </p>
-      <div style="margin-top:8px; text-align:left; max-width:720px;">
-        <p style="margin:0 0 6px 0;"><strong>Con los correspondientes descuentos</strong></p>
-        <ul style="line-height:1.7; padding-left:18px; margin:0;">
-          <li>20% hasta 2 meses antes de la llegada.</li>
-          <li>15% entre 2 meses y 15 días antes.</li>
-          <li>10% entre 14 y el día de llegada.</li>
+    <div class="hotel-grid">
+      <div class="hotel-card">
+        <h4>Innside by Meliá Zaragoza</h4>
+        <p>Reserva online con descuento exclusivo para invitados.</p>
+        <ul>
+          <li>20% hasta 2 meses antes</li>
+          <li>15% entre 2 meses y 15 días</li>
+          <li>10% hasta el día de llegada</li>
         </ul>
+        <br>
+        <a class="button" href="https://events.melia.com/es/events/innside-zaragoza/ENLACE-ELISA-Y-JAVIER" target="_blank" rel="noopener">Reservar</a>
+      </div>
+
+      <div class="hotel-card">
+        <h4>Aparthotel Los Girasoles</h4>
+        <p>Reservas por teléfono o email indicando <em>"Enlace Elisa &amp; Javier, 14 de noviembre"</em>.</p>
+        <p>976 46 92 00</p>
+        <p>informacion@losgirasoles.info</p>
+      </div>
+
+      <div class="hotel-card">
+        <h4>Hotel Alfonso</h4>
+        <p>Más información próximamente.</p>
       </div>
     </div>
-
-    <div class="card">
-      <h4 style="margin:0 0 6px 0;">Aparthotel Los Girasoles</h4>
-      <p style="max-width:800px; margin:0;">
-        Reservas vía telefónica (976 46 92 00) o vía mail (informacion@losgirasoles.info) indicando “Enlace Elisa &amp; Javier del 14 de Noviembre”.
-      </p>
-    </div>
-
-    <div class="card">
-      <h4 style="margin:0;">Hotel Alfonso</h4>
-    </div>
   </section>
 
-  <!-- ¿NOS ACOMPAÑAS? -->
+  <!-- ASISTENCIA -->
   <section class="section reveal" id="asistencia">
-    <h3>¿Nos acompañas?</h3>
-    <p>Es un día muy especial para nosotros y queremos que lo disfrutes con nosotros.</p>
-    <a class="button" href="https://forms.gle/y8c1GELsSz4hQiGC6" target="_blank" rel="noopener">Confirmar asistencia</a>
+    <div class="asistencia-inner">
+      <div class="section-heading">
+        <h3>¿Nos acompañas?</h3>
+        <div class="rule"></div>
+      </div>
+      <p>Es uno de los días más importantes de nuestras vidas y queremos vivirlo con vosotros. Por favor, confirma tu asistencia antes del <strong>30 de septiembre</strong>.</p>
+      <a class="button filled" href="https://forms.gle/y8c1GELsSz4hQiGC6" target="_blank" rel="noopener">Confirmar asistencia</a>
+    </div>
   </section>
 
-  <!-- FOTO 3 de transición -->
-  <section class="section reveal" aria-hidden="true" style="padding-top:0;">
+  <!-- FOTO DE TRANSICIÓN -->
+  <section class="section reveal" aria-hidden="true" style="padding-top:0; padding-bottom:80px;">
     <div class="divider-photo">
       <img src="img_foto3.jpg" alt="" loading="lazy">
     </div>
   </section>
 
-  <!-- REGALO DE BODA -->
+  <!-- REGALO -->
   <section class="section reveal" id="regalo">
-    <h3>Regalo de boda</h3>
-    <p>Vuestra presencia es, sin duda, nuestro mayor regalo.</p>
-    <p>Si además deseáis acompañarnos en el comienzo de esta nueva aventura, os estaremos muy agradecidos.</p>
-
-    <div class="bank">
-      <div class="iban-wrap">
-        <code id="iban">ES36 0049 7405 0020 1004 7891</code>
+    <div class="regalo-inner">
+      <div class="section-heading">
+        <h3>Regalo de boda</h3>
+        <div class="rule"></div>
+      </div>
+      <p>Vuestra presencia es, sin duda, nuestro mayor regalo.</p>
+      <p>Si además queréis hacernos partícipes del comienzo de esta nueva aventura, os lo agradecemos de corazón.</p>
+      <div class="iban-block">
+        <span class="iban-number" id="iban">ES36 0049 7405 0020 1004 7891</span>
         <button class="button" id="copyIbanBtn" onclick="copyIBAN()">Copiar IBAN</button>
       </div>
     </div>
   </section>
 
   <footer>
-    <p>¡Gracias por acompañarnos en este día tan especial!</p>
+    <p>Gracias por acompañarnos en este día tan especial.</p>
   </footer>
 
   <script>
-    // === CUENTA ATRÁS (responsive) ===
+    // CUENTA ATRÁS
     const target = new Date("Nov 14, 2026 12:00:00").getTime();
-    const el = {dd:document.getElementById('dd'), hh:document.getElementById('hh'),
-                mm:document.getElementById('mm'), ss:document.getElementById('ss')};
-
+    const el = {
+      dd: document.getElementById('dd'),
+      hh: document.getElementById('hh'),
+      mm: document.getElementById('mm'),
+      ss: document.getElementById('ss')
+    };
     function tick(){
-      const now = Date.now();
-      let d = target - now;
-      if (d <= 0){ d = 0; clearInterval(t); }
-      const days = Math.floor(d / 86400000);
-      const hours = Math.floor((d % 86400000) / 3600000);
-      const mins = Math.floor((d % 3600000) / 60000);
-      const secs = Math.floor((d % 60000) / 1000);
-      el.dd.textContent = String(days);
-      el.hh.textContent = String(hours).padStart(2,'0');
-      el.mm.textContent = String(mins).padStart(2,'0');
-      el.ss.textContent = String(secs).padStart(2,'0');
+      let d = target - Date.now();
+      if(d <= 0){ d = 0; clearInterval(t); }
+      el.dd.textContent = Math.floor(d/86400000);
+      el.hh.textContent = String(Math.floor((d%86400000)/3600000)).padStart(2,'0');
+      el.mm.textContent = String(Math.floor((d%3600000)/60000)).padStart(2,'0');
+      el.ss.textContent = String(Math.floor((d%60000)/1000)).padStart(2,'0');
     }
     const t = setInterval(tick, 1000); tick();
 
-    // === COPIAR IBAN ===
+    // COPIAR IBAN
     function copyIBAN(){
       const iban = document.getElementById("iban").innerText.trim();
       navigator.clipboard.writeText(iban).then(()=>{
@@ -321,15 +440,15 @@
         const prev = btn.textContent;
         btn.textContent = "¡Copiado!";
         setTimeout(()=> btn.textContent = prev, 1500);
-      }).catch(()=> alert("No se pudo copiar. Copia manual: "+iban));
+      }).catch(()=> alert("Copia manual: "+iban));
     }
 
-    // === REVEAL EN SCROLL (transiciones fluidas) ===
+    // REVEAL EN SCROLL
     const io = new IntersectionObserver((entries)=>{
       for(const e of entries){
         if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
       }
-    }, {threshold: .12});
+    }, {threshold:.1});
     document.querySelectorAll('.reveal').forEach(n => io.observe(n));
   </script>
 </body>
